@@ -14,20 +14,13 @@
 >
   <:col :let={{_id, url}} label="original"><%= url.original %></:col>
   <:col :let={{_id, url}} label="Short"><%= url.short %></:col>
-  <:col :let={{_id, url}} label="Visits"><%= url.visits %></:col>
+
+  <:col :if={@live_action == :show_stats} :let={{_id, url}} label="Visits"><%= url.visits %></:col>
+
   <:action :let={{_id, url}}>
     <div class="sr-only">
       <.link navigate={~p"/urls/#{url}"}>Show</.link>
     </div>
-    <.link patch={~p"/urls/#{url}/edit"}>Edit</.link>
-  </:action>
-  <:action :let={{id, url}}>
-    <.link
-      phx-click={JS.push("delete", value: %{id: url.id}) |> hide("##{id}")}
-      data-confirm="Are you sure?"
-    >
-      Delete
-    </.link>
   </:action>
 </.table>
 

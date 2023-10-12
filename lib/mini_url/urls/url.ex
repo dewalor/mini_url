@@ -28,8 +28,6 @@ defmodule MiniUrl.Urls.Url do
 
   defp validate(%Ecto.Changeset{errors: errors, changes: %{ original: original_url }} = changeset)
                                     when Kernel.length(errors) == 0 do
-    IO.inspect(changeset, label: "____________%%%%%%%%")
-
     {:ok, %URI{
       scheme: scheme,
       host: host,
@@ -38,13 +36,13 @@ defmodule MiniUrl.Urls.Url do
 
     with {:is_http_or_s, true} <- {:is_http_or_s, scheme in ["http", "https"]},
          {:host_present, true} <- {:host_present, not is_nil(host)},
-         {:has_slash, true} <- {:has_slash,  String.contains?(path, "/")} do
+         {:has_slash, true} <- {:has_slash,  not is_nil(path) and String.contains?(path, "/")} do
 
       changeset
     else
-      {:is_http_or_s, false}  -> add_error(changeset, :is_http_or_s, "must begin with http or https")
-      {:host_present, false}  -> add_error(changeset, :host_present, "must have a host, e.g. example.com")
-      {:has_slash, false}  -> add_error(changeset, :has_slash, "must have a slash in the path, e.g. example.com/")
+      {:is_http_or_s, false}  -> add_error(changeset, :original, "must begin with http or https")
+      {:host_present, false}  -> add_error(changeset, :original, "must have a host, e.g. example.com")
+      {:has_slash, false}  -> add_error(changeset, :original, "must have a slash in the path, e.g. example.com/")
     end
   end
 

@@ -32,6 +32,12 @@ defmodule MiniUrlWeb.UrlLive.Index do
     |> assign(:url, nil)
   end
 
+  defp apply_action(socket, :show_stats, _params) do
+    socket
+    |> assign(:page_title, "Listing Urls with Stats")
+    |> assign(:url, nil)
+  end
+
   @impl true
   def handle_info({MiniUrlWeb.UrlLive.FormComponent, {:saved, url}}, socket) do
     {:noreply, stream_insert(socket, :urls, url)}

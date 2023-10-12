@@ -19,9 +19,10 @@ defmodule MiniUrlWeb.Router do
 
     live "/", UrlLive.Index, :new
     live "/urls", UrlLive.Index, :index
+    get "/:short", UrlController, :translate
+    live "/stats", UrlLive.Index, :show_stats
     live "/urls/new", UrlLive.Index, :new
     live "/urls/:id/edit", UrlLive.Index, :edit
-
     live "/urls/:id", UrlLive.Show, :show
     live "/urls/:id/show/edit", UrlLive.Show, :edit
   end

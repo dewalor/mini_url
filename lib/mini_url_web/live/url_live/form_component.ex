@@ -62,7 +62,7 @@ defmodule MiniUrlWeb.UrlLive.FormComponent do
         {:noreply,
          socket
          |> put_flash(:info, "Url updated successfully")
-         |> push_patch(to: socket.assigns.patch)}
+         |> redirect(external: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign_form(socket, changeset)}
@@ -77,7 +77,7 @@ defmodule MiniUrlWeb.UrlLive.FormComponent do
         {:noreply,
          socket
          |> put_flash(:info, "Url created successfully")
-         |> push_patch(to: socket.assigns.patch)}
+         |> redirect(external: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign_form(socket, changeset)}
