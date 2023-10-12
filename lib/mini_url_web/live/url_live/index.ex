@@ -10,9 +10,7 @@ defmodule MiniUrlWeb.UrlLive.Index do
   end
 
   @impl true
-  def handle_params(params, url, socket) do
-    IO.inspect(url, label: "URL--------------")
-    
+  def handle_params(params, _url, socket) do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
