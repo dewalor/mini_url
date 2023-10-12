@@ -74,6 +74,7 @@ defmodule MiniUrl.Urls do
 
   """
   def create_url(attrs \\ %{}) do
+    attrs = Map.put(attrs, "short", generate_random_key())
     %Url{}
     |> Url.changeset(attrs)
     |> Repo.insert()
@@ -124,5 +125,12 @@ defmodule MiniUrl.Urls do
   """
   def change_url(%Url{} = url, attrs \\ %{}) do
     Url.changeset(url, attrs)
+  end
+
+  defp generate_random_key() do
+    :crypto.strong_rand_bytes(8)
+    |> Base.url_encode64()
+    |> String.replace(~r/[-_\=]/, "")
+    |> Kernel.binary_part(0, 8)
   end
 end
