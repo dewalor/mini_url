@@ -11,12 +11,11 @@ defmodule MiniUrl.UrlsFixtures do
     {:ok, url} =
       attrs
       |> Enum.into(%{
-        original: "some original",
-        short: "some short",
+        original: "http://someoriginal.com/",
+        short: nil,
         visits: 42
       })
       |> MiniUrl.Urls.create_url()
-
     url
   end
 end

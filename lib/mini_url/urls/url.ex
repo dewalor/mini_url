@@ -28,6 +28,7 @@ defmodule MiniUrl.Urls.Url do
 
   defp validate(%Ecto.Changeset{errors: errors, changes: %{ original: original_url }} = changeset)
                                     when Kernel.length(errors) == 0 do
+
     {:ok, %URI{
       scheme: scheme,
       host: host,

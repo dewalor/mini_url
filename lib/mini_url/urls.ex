@@ -73,7 +73,16 @@ defmodule MiniUrl.Urls do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_url(attrs \\ %{}) do
+  def create_url(attrs \\ %{})
+
+  def create_url(%{original: _, short: _, visits: _} = attrs) do
+    attrs = Map.put(attrs, :short, generate_random_key())
+    %Url{}
+    |> Url.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def create_url(%{"original" => _, "short" => _, "visits" => _} = attrs) do
     attrs = Map.put(attrs, "short", generate_random_key())
     %Url{}
     |> Url.changeset(attrs)
