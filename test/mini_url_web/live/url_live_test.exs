@@ -5,7 +5,6 @@ defmodule MiniUrlWeb.UrlLiveTest do
   import MiniUrl.UrlsFixtures
 
   @create_attrs %{original: "http://someoriginal.com/", short: nil, visits: 42}
-  @update_attrs %{original: "http://someupdated original.com/", short: nil, visits: 43}
   @invalid_attrs %{original: nil, short: nil, visits: nil}
 
   defp create_url(_) do
@@ -55,6 +54,10 @@ defmodule MiniUrlWeb.UrlLiveTest do
 
       assert html =~ "Show Url"
       assert html =~ url.original
+    end
+
+    test "visiting non-existent short url redirects to Index", %{conn: conn, url: url} do
+      assert {:error, {:redirect, %{flash: %{}, to: "/urls"}}} = live(conn, ~p"/0piJkuSs")
     end
   end
 end

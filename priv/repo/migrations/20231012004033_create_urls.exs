@@ -9,5 +9,8 @@ defmodule MiniUrl.Repo.Migrations.CreateUrls do
 
       timestamps(type: :utc_datetime)
     end
+
+    create index(:urls, [:original], unique: true)
+    create index(:urls, [:short], unique: true)
   end
 end

@@ -9,7 +9,7 @@ defmodule MiniUrlWeb.UrlLive.FormComponent do
     <div>
       <.header>
         <%= @title %>
-        <:subtitle>Use this form to manage url records in your database.</:subtitle>
+        <:subtitle>Submit an url for shortening.</:subtitle>
       </.header>
 
       <.simple_form
@@ -20,10 +20,10 @@ defmodule MiniUrlWeb.UrlLive.FormComponent do
         phx-submit="save"
       >
         <.input field={@form[:original]} type="text" label="original" />
-        <.input field={@form[:short]} type="text" label="Short" />
-        <.input field={@form[:visits]} type="number" label="Visits" />
+        <.input field={@form[:short]} type="hidden" />
+        <.input field={@form[:visits]} type="hidden" />
         <:actions>
-          <.button phx-disable-with="Saving...">Save Url</.button>
+          <.button phx-disable-with="Saving...">Submit</.button>
         </:actions>
       </.simple_form>
     </div>

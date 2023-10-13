@@ -39,29 +39,6 @@ defmodule MiniUrl.Urls do
   def get_url!(id), do: Repo.get!(Url, id)
 
   @doc """
-  Gets the original url string given the short url string.
-
-  Returns nil if the Url does not exist.
-
-  ## Examples
-
-      iex> get_original(x1y23)
-      "http://www.example.com"
-
-      iex> get_original(4a5c6)
-      nil
-
-  """
-  def get_original(short_url) when is_nil(short_url), do: "/urls"
-
-  def get_original(short_url) do
-    case url = Repo.get_by(Url, short: short_url) do
-      %Url{} -> url.original
-      _ -> "/urls"
-    end
-  end
-
-  @doc """
   Creates a url.
 
   ## Examples
