@@ -7,13 +7,14 @@
   </:actions>
 </.header>
 
+
 <.table
   id="urls"
   rows={@streams.urls}
   row_click={fn {_id, url} -> JS.navigate(~p"/urls/#{url}") end}
 >
   <:col :let={{_id, url}} label="original"><%= url.original %></:col>
-  <:col :let={{_id, url}} label="Short"><%= url.short %></:col>
+  <:col :let={{_id, url}} label="short">http://localhost:8080/<%= url.short %></:col>
 
   <:col :if={@live_action == :show_stats} :let={{_id, url}} label="Visits"><%= url.visits %></:col>
 

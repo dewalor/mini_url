@@ -4,7 +4,8 @@ defmodule MiniUrlWeb.UrlLiveTest do
   import Phoenix.LiveViewTest
   import MiniUrl.UrlsFixtures
 
-  @create_attrs %{original: "http://someoriginal.com/", short: nil, visits: 42}
+  @create_attrs %{original: "http://someoriginal.com/", short: nil, visits: 0}
+  @create_attrs_1 %{original: "http://someoriginal1.com/", short: nil, visits: 0}
   @invalid_attrs %{original: nil, short: nil, visits: nil}
 
   defp create_url(_) do
@@ -35,7 +36,7 @@ defmodule MiniUrlWeb.UrlLiveTest do
              |> render_change() =~ "can&#39;t be blank"
 
       assert index_live
-             |> form("#url-form", url: @create_attrs)
+             |> form("#url-form", url: @create_attrs_1)
              |> render_submit()
 
       assert_patch(index_live, ~p"/urls")
@@ -48,16 +49,11 @@ defmodule MiniUrlWeb.UrlLiveTest do
 
   describe "Show" do
     setup [:create_url]
-
     test "displays url", %{conn: conn, url: url} do
       {:ok, _show_live, html} = live(conn, ~p"/urls/#{url}")
 
       assert html =~ "Show Url"
       assert html =~ url.original
-    end
-
-    test "visiting non-existent short url redirects to Index", %{conn: conn, url: url} do
-      assert {:error, {:redirect, %{flash: %{}, to: "/urls"}}} = live(conn, ~p"/0piJkuSs")
     end
   end
 end

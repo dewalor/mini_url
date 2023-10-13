@@ -21,7 +21,7 @@ defmodule MiniUrlWeb.UrlLive.FormComponent do
       >
         <.input field={@form[:original]} type="text" label="original" />
         <.input field={@form[:short]} type="hidden" />
-        <.input field={@form[:visits]} type="hidden" />
+        <.input field={@form[:visits]} type="hidden" type="number" />
         <:actions>
           <.button phx-disable-with="Saving...">Submit</.button>
         </:actions>
@@ -70,6 +70,7 @@ defmodule MiniUrlWeb.UrlLive.FormComponent do
   end
 
   defp save_url(socket, :new, url_params) do
+
     case Urls.create_url(url_params) do
       {:ok, url} ->
         notify_parent({:saved, url})

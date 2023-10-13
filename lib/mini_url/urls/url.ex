@@ -22,7 +22,7 @@ defmodule MiniUrl.Urls.Url do
   def changeset(url, attrs) do
     url
     |> cast(attrs, [:original, :short, :visits])
-    |> unique_constraint([:original], message: "Please enter a unique original url.")
+    |> unique_constraint([:original], message: "This original url already exists in the system.  Please enter a unique value.")
     |> unique_constraint([:short])
     |> validate_required([:original, :short, :visits])
     |> validate()

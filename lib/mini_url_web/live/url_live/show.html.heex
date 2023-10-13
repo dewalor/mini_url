@@ -10,8 +10,8 @@
 
 <.list>
   <:item title="original"><%= @url.original %></:item>
-  <:item title="Short"><%= @url.short %></:item>
-  <:item title="Visits"><%= @url.visits %></:item>
+  <:item title="short">http://localhost:8080/<%= @url.short %></:item>
+  <:item title="visits"><%= @url.visits %></:item>
 </.list>
 
 <.back navigate={~p"/urls"}>Back to urls</.back>
