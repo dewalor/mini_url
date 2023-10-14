@@ -1,13 +1,17 @@
 <.header>
   Listing Urls
+ 
   <:actions>
     <.link patch={~p"/urls/new"}>
       <.button>New Url</.button>
     </.link>
   </:actions>
+  <:actions>
+    <form style="display: inline;" action={~p"/download"}>
+      <.button type="submit">Download CSV</.button>
+    </form>
+  </:actions>
 </.header>
-
-
 <.table
   id="urls"
   rows={@streams.urls}
