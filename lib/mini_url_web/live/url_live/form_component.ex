@@ -20,8 +20,8 @@ defmodule MiniUrlWeb.UrlLive.FormComponent do
         phx-submit="save"
       >
         <.input field={@form[:original]} type="text" label="original" />
-        <.input field={@form[:short]} type="hidden" />
-        <.input field={@form[:visits]} type="hidden" type="number" />
+        <.input style="display:none" field={@form[:short]} />
+        <.input style="display:none" field={@form[:visits]} type="number" />
         <:actions>
           <.button phx-disable-with="Saving...">Submit</.button>
         </:actions>
