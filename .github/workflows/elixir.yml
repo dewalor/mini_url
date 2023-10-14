@@ -20,6 +20,19 @@ jobs:
     name: Build and test
     runs-on: ubuntu-latest
 
+    services:
+      invoices_control_db_test:
+        image: postgres:latest
+        ports: ['5432:5432']
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_HOST_AUTH_METHOD: 'trust'
+          POSTGRES_DB: invoices_control_test
+
+    env:
+      MIX_ENV: test
+
     steps:
     - uses: actions/checkout@v3
     - name: Set up Elixir
@@ -48,4 +61,10 @@ jobs:
         mix ecto.create
         mix ecto.migrate
     - name: Run tests
+      env:
+        MIX_ENV: test
+        PGHOST: localhost
+        POSTGRES_PORT: 5432
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
       run: mix test
