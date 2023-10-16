@@ -4,8 +4,7 @@ defmodule MiniUrlWeb.UrlLiveTest do
   import Phoenix.LiveViewTest
   import MiniUrl.UrlsFixtures
 
-  @create_attrs %{original: "http://someoriginal.com/", short: nil, visits: 0}
-  @create_attrs_1 %{original: "http://someoriginal1.com/", short: nil, visits: 0}
+  @create_attrs %{original: "http://example1.com/", short: nil, visits: 0}
   @invalid_attrs %{original: nil, short: nil, visits: nil}
 
   defp create_url(_) do
@@ -36,14 +35,14 @@ defmodule MiniUrlWeb.UrlLiveTest do
              |> render_change() =~ "can&#39;t be blank"
 
       assert index_live
-             |> form("#url-form", url: @create_attrs_1)
+             |> form("#url-form", url: @create_attrs)
              |> render_submit()
 
       assert_patch(index_live, ~p"/urls")
 
       html = render(index_live)
       assert html =~ "Url created successfully"
-      assert html =~ "someoriginal"
+      assert html =~ "example1"
     end
   end
 

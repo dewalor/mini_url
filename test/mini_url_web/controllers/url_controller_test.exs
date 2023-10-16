@@ -24,13 +24,13 @@ defmodule MiniUrlWeb.UrlControllerTest do
 
     test "visiting short url increments the url's visits", %{conn: conn, url: url} do
       initial_visits = url.visits
-      conn = get(conn, ~p"/#{url.short}")
+      _conn = get(conn, ~p"/#{url.short}")
       updated_url = Repo.get!(Url, url.id)
       assert updated_url.visits == initial_visits + 1
     end
 
-    test "visiting non-existent short url redirects to Index", %{conn: conn, url: url} do
-      conn = get(conn, ~p"/0piJkuSs")
+    test "visiting non-existent short url redirects to Index", %{conn: conn, url: _url} do
+      _conn = get(conn, ~p"/0piJkuSs")
       assert {:error, {:redirect, %{flash: %{}, to: "/urls"}}}
     end
   end

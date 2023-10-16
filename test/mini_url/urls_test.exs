@@ -21,10 +21,10 @@ defmodule MiniUrl.UrlsTest do
     end
 
     test "create_url/1 with valid data creates a url" do
-      valid_attrs = %{original: "http://someoriginal.com/", short: nil, visits: 42}
+      valid_attrs = %{original: "http://example.com/", short: nil, visits: 42}
 
       assert {:ok, %Url{} = url} = Urls.create_url(valid_attrs)
-      assert url.original == "http://someoriginal.com/"
+      assert url.original == "http://example.com/"
       assert String.length(url.short) == 8
       assert url.visits == 42
     end

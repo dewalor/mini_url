@@ -19,7 +19,7 @@ defmodule MiniUrlWeb.UrlLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:original]} type="text" label="original" />
+        <.input field={@form[:original]} type="text" label="original url" placeholder="example.com/"/>
         <.input style="display:none" field={@form[:short]} />
         <.input style="display:none" field={@form[:visits]} type="number" />
         <:actions>
